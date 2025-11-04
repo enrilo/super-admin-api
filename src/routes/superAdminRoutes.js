@@ -1,25 +1,25 @@
 // @ts-check
 import express from "express";
-// import { userLoginController } from "../controllers/user/userLoginController.js";
-// import { createUserController } from "../controllers/user/createUserController.js";
+import { deleteSuperAdminByIdController } from "../controllers/super-admin/deleteSuperAdminByIdController.js";
+import { createSuperAdminController } from "../controllers/super-admin/createSuperAdminController.js";
 import { getSuperAdminsController } from "../controllers/super-admin/getSuperAdminsController.js";
-// import { getUserByIdController } from "../controllers/user/getUserByIdController.js";
-// import { deleteUserByIdController } from "../controllers/user/deleteUserByIdController.js";
-// import { updateUserController } from "../controllers/user/updateUserController.js";
+import { getSuperAdminByIdController } from "../controllers/super-admin/getSuperAdminByIdController.js";
+import { updateSuperAdminController } from "../controllers/super-admin/updateSuperAdminController.js";
+import { superAdminLoginController } from "../controllers/super-admin/superAdminLoginController.js";
 
 const userRoutes = express.Router();
 
-// userRoutes.post("/login", userLoginController);
+userRoutes.post("/login", superAdminLoginController);
 
-// userRoutes.post("/", createUserController);
+userRoutes.post("/", createSuperAdminController);
 
 userRoutes.get("/", getSuperAdminsController);
 
-// userRoutes.get("/:id", getUserByIdController);
+userRoutes.get("/:id", getSuperAdminByIdController);
 
-// userRoutes.delete("/:id", deleteUserByIdController);
+userRoutes.delete("/:id", deleteSuperAdminByIdController);
 
-// userRoutes.put("/:id", updateUserController);
+userRoutes.put("/:id", updateSuperAdminController);
 
 export default userRoutes;
 
