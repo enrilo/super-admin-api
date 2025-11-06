@@ -15,7 +15,11 @@ const app = express();
 const httpServer = createServer(app); // Create HTTP server
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173", // frontend origin
+  credentials: true,               // ✅ allow cookies
+}
+));
 app.use(logger("dev"));
 app.use(express.json());
 const router = express.Router();
