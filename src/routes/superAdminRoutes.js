@@ -6,10 +6,13 @@ import { getSuperAdminsController } from "../controllers/super-admin/getSuperAdm
 import { getSuperAdminByIdController } from "../controllers/super-admin/getSuperAdminByIdController.js";
 import { updateSuperAdminController } from "../controllers/super-admin/updateSuperAdminController.js";
 import { superAdminLoginController } from "../controllers/super-admin/superAdminLoginController.js";
+import { superAdminLogoutController } from "../controllers/super-admin/superAdminLogoutController.js";
 
 const userRoutes = express.Router();
 
 userRoutes.post("/login", superAdminLoginController);
+
+userRoutes.post('/logout', superAdminLogoutController);
 
 userRoutes.post("/", createSuperAdminController);
 
