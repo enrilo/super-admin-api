@@ -51,7 +51,7 @@ export const superAdminLoginController = async (req, res) => {
         };
 
         const accessToken = jwt.sign(payload, process.env.JWT_SECRET, {
-            expiresIn: "2h", // adjust as needed
+            expiresIn: "30d", // adjust as needed
         });
 
         // 6️⃣ Update last login timestamp
