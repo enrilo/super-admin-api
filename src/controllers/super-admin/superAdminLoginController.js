@@ -48,7 +48,12 @@ export const superAdminLoginController = async (req, res) => {
 
         const accessToken = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "30d" });
 
-        res.cookie('access_token', accessToken, {httpOnly:true, maxAge: 30 * 24 * 60 * 60 * 1000,});
+        res.cookie('access_token', accessToken, {
+            httpOnly:true, 
+            maxAge: 30 * 24 * 60 * 60 * 1000,
+            secure: false,                       // convert to true before sending to production
+            sameSite: 'none',
+        });
 
         // 6️⃣ Update last login timestamp
         admin.last_login = new Date();
