@@ -8,6 +8,7 @@ const superAdminSchema = new mongoose.Schema(
         country_code: { type: String, required: true },
         phone: { type: Number, required: true },
         company_email: { type: String, required: true, unique: true },
+        password: { type: String, required: true },
         email: { type: String, unique: true },
         position: { type: String, required: true }, // e.g., "Super Admin", "CEO", etc.
 
