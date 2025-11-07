@@ -9,6 +9,7 @@ const superAdminSchema = new mongoose.Schema(
         phone: { type: Number, required: true },
         company_email: { type: String, required: true, unique: true },
         password: { type: String, required: true },
+        reset_password_token: { type: String, required: false },
         email: { type: String, unique: true },
         position: { type: String, required: true }, // e.g., "Super Admin", "CEO", etc.
 

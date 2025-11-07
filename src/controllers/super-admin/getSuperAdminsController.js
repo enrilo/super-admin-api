@@ -7,7 +7,7 @@ export const getSuperAdminsController = async (req, res) => {
         const { search, country, state, city, page = 1, limit = 10 } = req.query;
 
         // 🧠 Build dynamic filter
-        const filter = { role: "super_admin" };
+        const filter = {};
 
         if (country) filter.country = country;
         if (state) filter.state = state;
@@ -25,6 +25,9 @@ export const getSuperAdminsController = async (req, res) => {
 
         const skip = (page - 1) * limit;
 
+        console.log('filter');
+        console.log(filter);
+        
         // 🧩 Fetch data
         const superAdmins = await SuperAdmin.find(filter)
             .select("-password") // hide password if exists

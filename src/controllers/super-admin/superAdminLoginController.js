@@ -44,12 +44,12 @@ export const superAdminLoginController = async (req, res) => {
         }
 
         // 5️⃣ Generate JWT
-        const payload = {id: admin._id, company_email: admin.company_email, role: "super_admin"};
+        const payload = { id: admin._id, company_email: admin.company_email, role: "super_admin" };
 
         const accessToken = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "30d" });
 
         res.cookie('access_token', accessToken, {
-            httpOnly:true, 
+            httpOnly: true,
             maxAge: 30 * 24 * 60 * 60 * 1000,
             secure: false,                       // convert to true before sending to production
             sameSite: 'none',
