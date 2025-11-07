@@ -53,17 +53,18 @@ const superAdminSchema = Joi.object({
 export const createSuperAdminController = async (req, res) => {
     try {
         // 1️⃣ Validate input
-        const { error, value } = superAdminSchema.validate(req.body, { abortEarly: false });
-        if (error) {
-            return res.status(400).json({
-                success: false,
-                message: "Validation failed",
-                details: error.details.map((d) => d.message),
-            });
-        }
+        // const { error, value } = superAdminSchema.validate(req.body, { abortEarly: false });
+        // if (error) {
+        //     console.log("Create superadmin error: ", error);
+        //     return res.status(400).json({
+        //         success: false,
+        //         message: "Validation failed",
+        //         details: error.details.map((d) => d.message),
+        //     });
+        // }
 
         // 2️⃣ Check for existing SuperAdmin (by company email)
-        const existingAdmin = await SuperAdmin.findOne({ company_email: value.company_email });
+        const existingAdmin = await SuperAdmin.findOne({ company_email: req.body.company_email });
         if (existingAdmin) {
             return res.status(409).json({
                 success: false,
@@ -72,7 +73,7 @@ export const createSuperAdminController = async (req, res) => {
         }
 
         // 3️⃣ Create SuperAdmin
-        const newSuperAdmin = new SuperAdmin(value);
+        const newSuperAdmin = new SuperAdmin(req.body);
         await newSuperAdmin.save();
 
         // 4️⃣ Respond success
