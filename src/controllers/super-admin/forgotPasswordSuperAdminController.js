@@ -37,7 +37,7 @@ export const forgotPasswordSuperAdminController = async (req, res) => {
         // 5️⃣ Send reset password email (implement this function)
         await sendEmail({
             to: admin.company_email,
-            subject: "Password Reset Request",
+            subject: "Enrilo Password Reset Request",
             template: "resetPassword",
             context: {
                 name: admin.full_name,
