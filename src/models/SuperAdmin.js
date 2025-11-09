@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const superAdminSchema = new mongoose.Schema(
     {
         // Basic Info
-        photo_url: { type: String, default: "" },
+        photo_url: { type: String, default:"https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg", },
         full_name: { type: String, required: true },
         country_code: { type: String, required: true },
         phone: { type: Number, required: true },
