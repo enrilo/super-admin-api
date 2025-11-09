@@ -52,7 +52,7 @@ export const superAdminLoginController = async (req, res) => {
             httpOnly: true,
             maxAge: 30 * 24 * 60 * 60 * 1000,
             secure: false,                       // convert to true before sending to production
-            sameSite: 'none',
+            sameSite: 'lax',
         });
 
         // 6️⃣ Update last login timestamp
