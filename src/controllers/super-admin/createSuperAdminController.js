@@ -12,6 +12,7 @@ const superAdminSchema = Joi.object({
     company_email: Joi.string().email().required(),
     email: Joi.string().email().allow(""),
     position: Joi.string().required(),
+    password: Joi.string().required(),
 
     // Address Info
     street_1: Joi.string().allow(""),

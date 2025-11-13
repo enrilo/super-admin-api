@@ -1,7 +1,6 @@
 import SuperAdmin from "../../models/SuperAdmin.js";
 import { successResponse, errorResponse } from "../../utils/ApiResponse.js";
-import { generateResetToken } from "../../utils/generateResetToken.js";
-import { sendEmail } from "../../utils/sendEmail.js";
+import bcrypt from "bcrypt";
 
 export const resetPasswordSuperAdmin = async (req, res) => {
     try {

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import SuperAdmin from "../../models/SuperAdmin.js";
 import { successResponse, errorResponse } from "../../utils/ApiResponse.js";
 
@@ -20,21 +20,21 @@ export const changePasswordSuperAdminController = async (req, res) => {
             return errorResponse(res, "Super Admin not found", 404);
         }
 
-        // 🔑 Check if old password matches
+        // 🔑 Compare old password
         const isMatch = await bcrypt.compare(oldPassword, superAdmin.password);
         if (!isMatch) {
             return errorResponse(res, "Old password is incorrect", 401);
         }
 
-        // 🧂 Hash new password
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(newPassword, salt);
+        // 🧂 Hash new password securely
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
 
-        // 💾 Update password
+        // 💾 Update and save
         superAdmin.password = hashedPassword;
         await superAdmin.save();
 
-        // ✅ Success response
+        // ✅ Send success response
         return successResponse(res, "Password changed successfully 🔐", {
             success: true,
         });
