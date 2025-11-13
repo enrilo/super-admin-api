@@ -9,6 +9,7 @@ import { superAdminLoginController } from "../controllers/super-admin/superAdmin
 import { superAdminLogoutController } from "../controllers/super-admin/superAdminLogoutController.js";
 import { forgotPasswordSuperAdminController } from "../controllers/super-admin/forgotPasswordSuperAdminController.js";
 import { resetPasswordSuperAdmin } from "../controllers/super-admin/resetPasswordSuperAdmin.js";
+import { changePasswordSuperAdminController } from "../controllers/super-admin/changePasswordSuperAdminController.js";
 import authenticateToken from "../middlewares/auth.js";
 
 const userRoutes = express.Router();
@@ -30,6 +31,8 @@ userRoutes.put("/:id", authenticateToken, updateSuperAdminController);
 userRoutes.post("/forgot-password", forgotPasswordSuperAdminController);
 
 userRoutes.post("/reset-password", resetPasswordSuperAdmin);
+
+userRoutes.put("/change-password/:id", authenticateToken, changePasswordSuperAdminController);
 
 export default userRoutes;
 
