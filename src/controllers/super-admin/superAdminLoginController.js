@@ -62,13 +62,11 @@ export const superAdminLoginController = async (req, res) => {
         // 7️⃣ Return success response
         return successResponse(res, "SuperAdmin login successful 🚀", {
             accessToken,
-            superAdmin: {
-                id: admin._id,
-                full_name: admin.full_name,
-                company_email: admin.company_email,
-                position: admin.position,
-                role: "super_admin",
-            },
+            id: admin._id,
+            full_name: admin.full_name,
+            company_email: admin.company_email,
+            position: admin.position,
+            role: "super_admin"
         });
     } catch (error) {
         console.error("❌ SuperAdmin Login Error:", error.message);
