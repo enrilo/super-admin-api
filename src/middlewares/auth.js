@@ -11,7 +11,7 @@ function authenticateToken(req, res, next) {
   const token = authHeader && authHeader.split(' ')[1]; // Expect: "Bearer <token>"
 
   if (!token) {
-    return res.status(401).json({ message: 'Access token missing' });
+    return res.status(401).json({ message: 'Access token is required' });
   }
 
   // Verify token
@@ -19,6 +19,29 @@ function authenticateToken(req, res, next) {
     if (err) {
       return res.status(403).json({ message: 'Invalid or expired token' });
     }
+
+    // Check if token is revoked or expired in the database
+    AccessToken.findOne({ token, is_revoked: false, is_expired: false })
+      .then((accessToken) => {
+        if (!accessToken) {
+          return res.status(403).json({ message: 'Token is revoked or expired' });
+        }
+
+        // Attach decoded user info to request
+        req.user = user;
+        next();
+      })
+      .catch((err) => {
+        console.error("❌ Error checking access token:", err);
+        return res.status(500).json({ message: 'Internal server error' });
+      });
+
+    // Check if token has permissions to access this route
+    // if (!accessToken.permissions[user.role][req.method.toLowerCase()]) {
+    //   return res.status(403).json({ message: 'Unauthorized' });
+    // }
+
+
 
     // Attach decoded user info to request
     req.user = user;

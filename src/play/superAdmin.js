@@ -10,17 +10,17 @@ import bcrypt from "bcrypt";
     await connectDB();
 
     // Password setup
-    const plainPassword = "Shoaib@2398";
+    const plainPassword = "Admin@2398";
     const hashedPassword = await hashPassword(plainPassword);
 
     // Sample Super Admin data
     const superAdminData = {
       photo_url: "https://example.com/uploads/superadmin_photo.jpg",
-      full_name: "Shoaib",
+      full_name: "Admin",
       country_code: "+91",
       phone: 8320336901,
-      company_email: "soeb2398@gmail.com",
-      email: "soeb2398@gmail.com",
+      company_email: "admin@yopmail.com",
+      email: "admin@yopmail.com",
       position: "Global Super Admin",
 
       street_1: "221B Baker Street",
@@ -31,7 +31,7 @@ import bcrypt from "bcrypt";
       zipcode: "400001",
 
       emergency_contact: {
-        name: "Tabrez Shaikh",
+        name: "Admin Account",
         relation: "Brother",
         country_code: "+91",
         phone: 8320336901,
@@ -52,7 +52,19 @@ import bcrypt from "bcrypt";
 
       is_active: true,
       notes: "Primary super admin responsible for global access.",
-      password: hashedPassword, // optional if your schema stores it
+      password: hashedPassword, // optional if your schema stores it,
+
+      bank_details: [
+        {
+          account_number: "1234567890",
+          account_holder_name: "Soebahmed Shaikh",
+          bank_name: "ICICI Bank",
+          branch_address: "Vadodara",
+          ifsc_code: "HDFC0000001",
+        },
+      ],
+
+      role: "super_admin",
     };
 
     // Ensure there’s no duplicate Super Admin

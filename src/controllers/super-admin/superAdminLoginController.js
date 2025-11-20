@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import SuperAdmin from "../../models/SuperAdmin.js";
+import AccessToken from "../../models/AccessToken.js";
 import { successResponse, errorResponse } from "../../utils/ApiResponse.js";
 
 /* ---------------------------------------------------
@@ -58,6 +59,33 @@ export const superAdminLoginController = async (req, res) => {
         // 6️⃣ Update last login timestamp
         admin.last_login = new Date();
         await admin.save();
+
+        // Save access toke in DB, delete the existing one before
+        await AccessToken.deleteMany({ user: admin._id });
+        const newAccessToken = new AccessToken({
+            token: accessToken,
+            super_admin: admin._id,
+            expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+            permissions: [
+                {
+                    super_admin: {
+                        create: true,
+                        read: true,
+                        update: true,
+                        delete: true,
+                    }
+                },
+                {
+                    consultancy: {
+                        create: true,
+                        read: true,
+                        update: true,
+                        delete: true,
+                    }
+                }
+            ]
+        });
+        await newAccessToken.save();
 
         // 7️⃣ Return success response
         return successResponse(res, "SuperAdmin login successful 🚀", {

@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url';
 import { createServer } from "http";
 import healthRoutes from './src/routes/healthRoutes.js'
 import superAdminRoutes from './src/routes/superAdminRoutes.js'
+import accessTokenRoutes from './src/routes/accessTokenRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -36,6 +37,7 @@ app.use("/api", router);
 
 router.use("/health", healthRoutes);
 router.use("/super-admins", superAdminRoutes);
+router.use("/access-tokens", accessTokenRoutes);
 
 // Health check base route
 app.get("/", (req, res) => {

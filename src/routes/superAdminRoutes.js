@@ -20,7 +20,7 @@ userRoutes.post('/logout', superAdminLogoutController);
 
 userRoutes.post("/", createSuperAdminController);
 
-userRoutes.get("/", authenticateToken, getSuperAdminsController);
+userRoutes.get("/", getSuperAdminsController);
 
 userRoutes.get("/:id", authenticateToken, getSuperAdminByIdController);
 

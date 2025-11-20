@@ -39,6 +39,19 @@ const superAdminSchema = new mongoose.Schema(
             },
         ],
 
+        bank_details: [
+            {
+                account_number: { type: String },
+                account_holder_name: { type: String },
+                bank_name: { type: String },
+                branch_address: { type: String },
+                ifsc_code: { type: String },
+                uploaded_at: { type: Date, default: Date.now },
+            }
+        ],
+
+        role: { type: String, default: "user" },
+
         // Access Control
         is_active: { type: Boolean, default: true },
         last_login: { type: Date },
