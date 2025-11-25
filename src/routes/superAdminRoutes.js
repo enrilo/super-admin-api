@@ -10,7 +10,8 @@ import { superAdminLogoutController } from "../controllers/super-admin/superAdmi
 import { forgotPasswordSuperAdminController } from "../controllers/super-admin/forgotPasswordSuperAdminController.js";
 import { resetPasswordSuperAdmin } from "../controllers/super-admin/resetPasswordSuperAdmin.js";
 import { changePasswordSuperAdminController } from "../controllers/super-admin/changePasswordSuperAdminController.js";
-import authenticateToken from "../middlewares/auth.js";
+import authenticateToken from "../middlewares/authenticateToken.js";
+import authorize from "../middlewares/authorize.js";
 
 const userRoutes = express.Router();
 
@@ -18,21 +19,21 @@ userRoutes.post("/login", superAdminLoginController);
 
 userRoutes.post('/logout', superAdminLogoutController);
 
-userRoutes.post("/", createSuperAdminController);
+userRoutes.post("/", authenticateToken, authorize(), createSuperAdminController);
 
-userRoutes.get("/", getSuperAdminsController);
+userRoutes.get("/", authenticateToken, authorize(), getSuperAdminsController);
 
-userRoutes.get("/:id", authenticateToken, getSuperAdminByIdController);
+userRoutes.get("/:id", authenticateToken, authorize(), getSuperAdminByIdController);
 
-userRoutes.delete("/:id", authenticateToken, deleteSuperAdminByIdController);
+userRoutes.delete("/:id", authenticateToken, authorize(), deleteSuperAdminByIdController);
 
-userRoutes.put("/:id", authenticateToken, updateSuperAdminController);
+userRoutes.put("/:id", authenticateToken, authorize(), updateSuperAdminController);
 
 userRoutes.post("/forgot-password", forgotPasswordSuperAdminController);
 
 userRoutes.post("/reset-password", resetPasswordSuperAdmin);
 
-userRoutes.put("/change-password/:id", authenticateToken, changePasswordSuperAdminController);
+userRoutes.put("/change-password/:id", authenticateToken, authorize(), changePasswordSuperAdminController);
 
 export default userRoutes;
 

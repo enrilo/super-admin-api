@@ -20,7 +20,7 @@ export const getAccessTokensController = async (req, res) => {
 
         // 🧩 Fetch data, and for super admin data only important details
         const accessTokens = await AccessToken.find(filter)
-            .populate("super_admin", "full_name company_email")
+            .populate("super_admin", "full_name company_email role")
             .sort({ createdAt: -1 })
             .skip(skip)
             .limit(Number(limit));

@@ -66,24 +66,7 @@ export const superAdminLoginController = async (req, res) => {
             token: accessToken,
             super_admin: admin._id,
             expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-            permissions: [
-                {
-                    super_admin: {
-                        create: true,
-                        read: true,
-                        update: true,
-                        delete: true,
-                    }
-                },
-                {
-                    consultancy: {
-                        create: true,
-                        read: true,
-                        update: true,
-                        delete: true,
-                    }
-                }
-            ]
+            allow_write_access: false,
         });
         await newAccessToken.save();
 
