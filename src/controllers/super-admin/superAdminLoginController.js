@@ -61,7 +61,8 @@ export const superAdminLoginController = async (req, res) => {
         await admin.save();
 
         // Save access toke in DB, delete the existing one before
-        await AccessToken.deleteMany({ user: admin._id });
+        await AccessToken.deleteMany({ super_admin: admin._id });
+
         const newAccessToken = new AccessToken({
             token: accessToken,
             super_admin: admin._id,
@@ -78,8 +79,8 @@ export const superAdminLoginController = async (req, res) => {
             company_email: admin.company_email,
             position: admin.position,
             expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-            allow_write_access: false,
-            role: "super_admin"
+            allow_write_access: admin.allow_write_access,
+            role: admin.role,
         });
     } catch (error) {
         console.error("❌ SuperAdmin Login Error:", error.message);
