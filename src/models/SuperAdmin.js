@@ -59,6 +59,8 @@ const superAdminSchema = new mongoose.Schema(
         // Metadata
         created_by: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
         notes: { type: String },
+
+        allow_write_access: { type: Boolean, default: false },
     },
     { timestamps: true }
 );

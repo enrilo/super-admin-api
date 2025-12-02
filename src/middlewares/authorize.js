@@ -7,7 +7,7 @@ export default function authorize() {
         }
 
         // Write protection: false => only GET allowed
-        if (!token.allow_write && req.method !== "GET") {
+        if (!token.allow_write_access && req.method !== "GET") {
             return res.status(403).json({
                 message: "Write operations are not allowed for this token"
             });

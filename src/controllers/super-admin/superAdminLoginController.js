@@ -61,15 +61,16 @@ export const superAdminLoginController = async (req, res) => {
         await admin.save();
 
         // Save access toke in DB, delete the existing one before
-        await AccessToken.deleteMany({ super_admin: admin._id });
+        await AccessToken.deleteMany({ super_admin_id: admin._id });
 
         const newAccessToken = new AccessToken({
             token: accessToken,
-            super_admin: admin._id,
+            super_admin_id: admin._id,
             expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
             allow_write_access: false,
         });
         await newAccessToken.save();
+
 
         // 7️⃣ Return success response
         return successResponse(res, "SuperAdmin login successful 🚀", {
