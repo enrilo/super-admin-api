@@ -43,6 +43,7 @@ const superAdminSchema = new mongoose.Schema(
             account_number: { type: String },
             account_holder_name: { type: String },
             bank_name: { type: String },
+            branch_name: { type: String },
             branch_address: { type: String },
             ifsc_code: { type: String },
         },
