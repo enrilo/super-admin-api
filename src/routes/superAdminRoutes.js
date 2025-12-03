@@ -19,21 +19,21 @@ userRoutes.post("/login", superAdminLoginController);
 
 userRoutes.post('/logout', superAdminLogoutController);
 
-userRoutes.post("/", authenticateToken, authorize(), createSuperAdminController);
+userRoutes.post("/", authenticateToken, await authorize(), createSuperAdminController);
 
-userRoutes.get("/", authenticateToken, authorize(), getSuperAdminsController);
+userRoutes.get("/", authenticateToken, await authorize(), getSuperAdminsController);
 
-userRoutes.get("/:id", authenticateToken, authorize(), getSuperAdminByIdController);
+userRoutes.get("/:id", authenticateToken, await authorize(), getSuperAdminByIdController);
 
-userRoutes.delete("/:id", authenticateToken, authorize(), deleteSuperAdminByIdController);
+userRoutes.delete("/:id", authenticateToken, await authorize(), deleteSuperAdminByIdController);
 
-userRoutes.put("/:id", authenticateToken, authorize(), updateSuperAdminController);
+userRoutes.put("/:id", authenticateToken, await authorize(), updateSuperAdminController);
 
 userRoutes.post("/forgot-password", forgotPasswordSuperAdminController);
 
 userRoutes.post("/reset-password", resetPasswordSuperAdmin);
 
-userRoutes.put("/change-password/:id", authenticateToken, authorize(), changePasswordSuperAdminController);
+userRoutes.put("/change-password/:id", authenticateToken, await authorize(), changePasswordSuperAdminController);
 
 export default userRoutes;
 
