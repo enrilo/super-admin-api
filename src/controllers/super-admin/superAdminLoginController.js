@@ -45,7 +45,7 @@ export const superAdminLoginController = async (req, res) => {
         }
 
         // 5️⃣ Generate JWT
-        const payload = { id: admin._id, company_email: admin.company_email, role: "super_admin" };
+        const payload = { id: admin._id, company_email: admin.company_email, role: admin.role };
 
         const accessToken = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "30d" });
 
@@ -67,7 +67,7 @@ export const superAdminLoginController = async (req, res) => {
             token: accessToken,
             super_admin_id: admin._id,
             expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-            allow_write_access: false,
+            allow_write_access: admin.allow_write_access,
         });
         await newAccessToken.save();
 
@@ -82,6 +82,7 @@ export const superAdminLoginController = async (req, res) => {
             expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
             // allow_write_access: admin.allow_write_access,
             // role: admin.role,
+            expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
         });
     } catch (error) {
         console.error("❌ SuperAdmin Login Error:", error.message);
