@@ -1,3 +1,5 @@
+import SuperAdmin from "../models/SuperAdmin.js";
+
 export default function authorize() {
     return async (req, res, next) => {
         const token = req.token;

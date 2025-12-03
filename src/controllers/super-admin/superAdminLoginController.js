@@ -79,9 +79,10 @@ export const superAdminLoginController = async (req, res) => {
             full_name: admin.full_name,
             company_email: admin.company_email,
             position: admin.position,
-            expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-            // allow_write_access: admin.allow_write_access,
-            // role: admin.role,
+            expires_at: new Date(Date
+                .now() + 30 * 24 * 60 * 60 * 1000),
+            allow_write_access: admin.allow_write_access,
+            role: admin.role,
             expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
         });
     } catch (error) {
