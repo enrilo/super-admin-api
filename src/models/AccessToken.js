@@ -23,7 +23,7 @@ const accessToken = new mongoose.Schema(
         expired_at: { type: Date },
 
         // 🚀 Dynamic permissions here
-        // allow_write_access: { type: Boolean, default: false },
+        allow_write_access: { type: Boolean, default: false },
     },
     { timestamps: true }
 );

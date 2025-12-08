@@ -1,5 +1,6 @@
 import AccessToken from "../../models/AccessToken.js";
 import { successResponse, errorResponse } from "../../utils/ApiResponse.js";
+import mongoose from "mongoose";
 
 // 🧩 GET ACCESS TOKENS BY SUPER ADMIN ID
 export const getAccessTokenBySuperAdminIdController = async (req, res) => {
