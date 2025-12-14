@@ -10,17 +10,17 @@ import bcrypt from "bcrypt";
     await connectDB();
 
     // Password setup
-    const plainPassword = "Admin@2398";
+    const plainPassword = "Tommy@2398";
     const hashedPassword = await hashPassword(plainPassword);
 
     // Sample Super Admin data
     const superAdminData = {
       photo_url: "https://example.com/uploads/superadmin_photo.jpg",
-      full_name: "Admin",
+      full_name: "Tommy",
       country_code: "+91",
       phone: 8320336901,
-      company_email: "admin@yopmail.com",
-      email: "admin@yopmail.com",
+      company_email: "tommy@yopmail.com",
+      email: "tommy@yopmail.com",
       position: "Global Super Admin",
 
       street_1: "221B Baker Street",
@@ -57,7 +57,7 @@ import bcrypt from "bcrypt";
       bank_details: [
         {
           account_number: "1234567890",
-          account_holder_name: "Soebahmed Shaikh",
+          account_holder_name: "Thomas Shelby",
           bank_name: "ICICI Bank",
           branch_address: "Vadodara",
           ifsc_code: "HDFC0000001",
