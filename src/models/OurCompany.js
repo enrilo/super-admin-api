@@ -6,11 +6,11 @@ const ourCompanySchema = new mongoose.Schema(
         name: { type: String, required: true },
         address: { type: String, required: true },
         website: { type: String, required: true },
-        gst_number: { type: String, required: false },
-        linkedin: { type: String, required: false },
-        twitter: { type: String, required: false },
-        facebook: { type: String, required: false },
-        instagram: { type: String, required: false },
+        gst_number: { type: String },
+        linkedin: { type: String },
+        twitter: { type: String },
+        facebook: { type: String },
+        instagram: { type: String },
     },
     { timestamps: true }
 );
