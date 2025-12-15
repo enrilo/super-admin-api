@@ -4,7 +4,7 @@ import { updateCompanyDetailsController } from "../controllers/our-company/updat
 
 const ourCompanyRoutes = express.Router();
 
-ourCompanyRoutes.get("/:id", getCompanyDetailsController);
+ourCompanyRoutes.get("/", getCompanyDetailsController);
 ourCompanyRoutes.put("/:id", updateCompanyDetailsController);
 
 export default ourCompanyRoutes;
