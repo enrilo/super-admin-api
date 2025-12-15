@@ -5,13 +5,8 @@ import mongoose from "mongoose";
 // 🧩 GET COMPANY DETAILS
 export const getCompanyDetailsController = async (req, res) => {
     try {
-        // 🧩 Validate MongoDB ObjectId
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return errorResponse(res, "Invalid Company ID format", 400);
-        }
-
-        // 🔍 Find Company
-        const company = await OurCompany.findById(id);
+        // Find first one and return
+        const company = await OurCompany.findOne();
 
         if (!company) {
             return errorResponse(res, "Company not found", 404);

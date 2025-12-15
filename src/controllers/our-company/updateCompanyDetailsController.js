@@ -5,22 +5,14 @@ import mongoose from "mongoose";
 // ✏️ UPDATE COMPANY DETAILS (Partial Update)
 export const updateCompanyDetailsController = async (req, res) => {
     try {
-        const { id } = req.params;
-        const updateData = { ...req.body };
-
-        // 🧩 Validate MongoDB ObjectId
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return errorResponse(res, "Invalid Company ID format", 400);
-        }
-
-        // 🔍 Check if Company exists
-        const company = await OurCompany.findById(id);
+        // Update in the first one
+        const company = await OurCompany.findOne();
         if (!company) {
             return errorResponse(res, "Company not found", 404);
         }
 
         // 🔧 Update Company fields
-        const updatedCompany = await OurCompany.findByIdAndUpdate(id, updateData, {
+        const updatedCompany = await OurCompany.findOneAndUpdate({}, req.body, {
             new: true,
             runValidators: true,
         });
