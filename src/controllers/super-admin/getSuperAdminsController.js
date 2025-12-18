@@ -16,7 +16,7 @@ export const getSuperAdminsController = async (req, res) => {
         if (search) {
             filter.$or = [
                 { full_name: { $regex: search, $options: "i" } },
-                { email: { $regex: search, $options: "i" } },
+                { role: { $regex: search, $options: "i" } },
                 { company_email: { $regex: search, $options: "i" } },
                 { phone: { $regex: search, $options: "i" } },
                 { position: { $regex: search, $options: "i" } },

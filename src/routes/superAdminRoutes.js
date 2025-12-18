@@ -33,7 +33,7 @@ userRoutes.post("/forgot-password", forgotPasswordSuperAdminController);
 
 userRoutes.post("/reset-password", resetPasswordSuperAdmin);
 
-userRoutes.put("/change-password/:id", authenticateToken, await authorize(), changePasswordSuperAdminController);
+userRoutes.put("/change-password/:id", authenticateToken, changePasswordSuperAdminController);
 
 export default userRoutes;
 
