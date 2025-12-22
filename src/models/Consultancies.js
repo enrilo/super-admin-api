@@ -1,0 +1,25 @@
+import mongoose from "mongoose";
+
+const consultanciesSchema = new mongoose.Schema(
+    {
+        photo_url: { type: String, default:"https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg", },
+        name: { type: String, required: true },
+        gst_number: { type: String },
+        linkedin_url: { type: String },
+        facebook_url: { type: String },
+        instagram_url: { type: String },
+        is_single_branch: { type: Boolean, default: true },
+        office_details: [
+            {
+                office_name: { type: String },
+                office_address: { type: String },
+                office_type: { type: String }, // headoffice/branch/franchise
+                country_code: { type: String },
+                phone_number: { type: Number },
+            },
+        ],
+    },
+    { timestamps: true }
+);
+
+export default mongoose.model("Consultancies", consultanciesSchema);

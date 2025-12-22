@@ -11,6 +11,8 @@ import healthRoutes from './src/routes/healthRoutes.js'
 import superAdminRoutes from './src/routes/superAdminRoutes.js'
 import accessTokenRoutes from './src/routes/accessTokenRoutes.js';
 import ourCompanyRoutes from './src/routes/ourCompanyRoutes.js';
+import paymentMethodRoutes from './src/routes/paymentMethodRoutes.js';
+import consultancyRoutes from './src/routes/consultancyRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -40,6 +42,8 @@ router.use("/health", healthRoutes);
 router.use("/super-admins", superAdminRoutes);
 router.use("/access-tokens", accessTokenRoutes);
 router.use("/our-company", ourCompanyRoutes);
+router.use("/payment-method", paymentMethodRoutes);
+router.use("/consultancies", consultancyRoutes);
 
 // Health check base route
 app.get("/", (req, res) => {
