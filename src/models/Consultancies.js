@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const consultanciesSchema = new mongoose.Schema(
     {
-        photo_url: { type: String, default:"https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg", },
+        photo_url: { type: String, default:"https://img.icons8.com/ios7/1200/company.jpg", },
         name: { type: String, required: true },
         gst_number: { type: String },
         linkedin_url: { type: String },
@@ -11,7 +11,7 @@ const consultanciesSchema = new mongoose.Schema(
         is_single_branch: { type: Boolean, default: true },
         office_details: [
             {
-                office_name: { type: String },
+                office_city: { type: String },
                 office_address: { type: String },
                 office_type: { type: String }, // headoffice/branch/franchise
                 country_code: { type: String },
