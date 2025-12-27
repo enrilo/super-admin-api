@@ -13,7 +13,7 @@ const consultancySchema = Joi.object({
     is_single_branch: Joi.boolean().default(true),
     office_details: Joi.array().items(
         Joi.object({
-            office_name: Joi.string().allow(""),
+            office_city: Joi.string().allow(""),
             office_address: Joi.string().allow(""),
             office_type: Joi.string().allow(""),
             country_code: Joi.string().allow(""),
