@@ -4,13 +4,15 @@ import { getAllPaymentsController } from "../controllers/payment-details/getAllP
 import { getPaymentByIdController } from "../controllers/payment-details/getPaymentByIdController.js";
 import { updatePaymentController } from "../controllers/payment-details/updatePaymentController.js";
 import { deletePaymentController } from "../controllers/payment-details/deletePaymentController.js";
+import authenticateToken from "../middlewares/authenticateToken.js";
+import authorize from "../middlewares/authorize.js";
 
 const paymentMethodRoutes = express.Router();
 
-paymentMethodRoutes.post("/", createPaymentController);
-paymentMethodRoutes.get("/", getAllPaymentsController);
-paymentMethodRoutes.get("/:id", getPaymentByIdController);
-paymentMethodRoutes.put("/:id", updatePaymentController);
-paymentMethodRoutes.delete("/:id", deletePaymentController);
+paymentMethodRoutes.post("/", authenticateToken, await authorize(), createPaymentController);
+paymentMethodRoutes.get("/", authenticateToken, await authorize(), getAllPaymentsController);
+paymentMethodRoutes.get("/:id", authenticateToken, await authorize(), getPaymentByIdController);
+paymentMethodRoutes.put("/:id", authenticateToken, await authorize(), updatePaymentController);
+paymentMethodRoutes.delete("/:id", authenticateToken, await authorize(), deletePaymentController);
 
 export default paymentMethodRoutes;
