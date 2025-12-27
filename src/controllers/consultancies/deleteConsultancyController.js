@@ -5,6 +5,7 @@ import Consultancies from "../../models/Consultancies.js";
 const consultancySchema = Joi.object({
     photo_url: Joi.string().allow(""),
     name: Joi.string().min(3).required(),
+    company_website: Joi.string().allow(""),
     gst_number: Joi.string().allow(""),
     linkedin_url: Joi.string().allow(""),
     facebook_url: Joi.string().allow(""),
