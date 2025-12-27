@@ -4,6 +4,7 @@ const consultanciesSchema = new mongoose.Schema(
     {
         photo_url: { type: String, default:"https://img.icons8.com/ios7/1200/company.jpg", },
         name: { type: String, required: true },
+        company_website: { type: String },
         gst_number: { type: String },
         linkedin_url: { type: String },
         facebook_url: { type: String },
