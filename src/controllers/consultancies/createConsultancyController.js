@@ -64,7 +64,7 @@ const consultancySchema = Joi.object({
     facebook_url: Joi.string().allow(""),
     instagram_url: Joi.string().allow(""),
     is_single_branch: Joi.boolean().default(true),
-    sundomain: Joi.string().required(),
+    subdomain: Joi.string().allow(""),
     office_details: Joi.array().items(
         Joi.object({
             office_city: Joi.string().allow(""),

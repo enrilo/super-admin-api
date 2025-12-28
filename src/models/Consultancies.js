@@ -10,7 +10,7 @@ const consultanciesSchema = new mongoose.Schema(
         facebook_url: { type: String },
         instagram_url: { type: String },
         is_single_branch: { type: Boolean, default: true },
-        sundomain: { type: String },
+        subdomain: { type: String },
         office_details: [
             {
                 office_city: { type: String },
