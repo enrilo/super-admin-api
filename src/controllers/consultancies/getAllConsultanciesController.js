@@ -19,6 +19,8 @@ export const getAllConsultanciesController = async (req, res) => {
         }
 
         const skip = (page - 1) * limit;
+
+        // 🧩 Fetch data, and for super admin data only important details
         const consultancies = await Consultancies.find(filter)
             .sort({ createdAt: -1 })
             .skip(skip)
@@ -35,7 +37,7 @@ export const getAllConsultanciesController = async (req, res) => {
             consultancies,
         });
     } catch (err) {
-        console.error("❌ Error fetching consultancies:", err);
+        console.error("❌ Error fetching Consultancies:", err);
         return errorResponse(res, "Internal server error", 500);
     }
 };

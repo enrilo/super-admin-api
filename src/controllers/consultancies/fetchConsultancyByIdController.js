@@ -1,27 +1,7 @@
 import { successResponse, errorResponse } from "../../utils/ApiResponse.js";
 import Joi from "joi";
 import Consultancies from "../../models/Consultancies.js";
-
-const consultancySchema = Joi.object({
-    photo_url: Joi.string().allow(""),
-    name: Joi.string().min(3).required(),
-    company_website: Joi.string().allow(""),
-    gst_number: Joi.string().allow(""),
-    linkedin_url: Joi.string().allow(""),
-    facebook_url: Joi.string().allow(""),
-    instagram_url: Joi.string().allow(""),
-    is_single_branch: Joi.boolean().default(true),
-    subdomain: Joi.string().allow(""),
-    office_details: Joi.array().items(
-        Joi.object({
-            office_city: Joi.string().allow(""),
-            office_address: Joi.string().allow(""),
-            office_type: Joi.string().allow(""),
-            country_code: Joi.string().allow(""),
-            phone_number: Joi.number().allow(""),
-        })
-    ).required(),
-});
+import ConsultancyBranches from "../../models/ConsultancyBranches.js";
 
 // 🧩 GET CONSULTANCY BY ID
 export const fetchConsultancyByIdController = async (req, res) => {
@@ -44,10 +24,14 @@ export const fetchConsultancyByIdController = async (req, res) => {
             return errorResponse(res, "Consultancy not found", 404);
         }
 
-        // 3️⃣ Respond success
+        // 3️⃣ Fetch Consultancy Branches
+        const branches = await ConsultancyBranches.find({ consultancy_id: id });
+
+        // 4️⃣ Respond success
         return successResponse(res, "Consultancy found successfully 🚀", {
             success: true,
             consultancy,
+            branches,
         });
     } catch (err) {
         console.error("❌ Error fetching Consultancy:", err);

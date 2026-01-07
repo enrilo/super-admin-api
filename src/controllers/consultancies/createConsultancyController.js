@@ -1,58 +1,7 @@
-
-// import { successResponse, errorResponse } from "../../utils/ApiResponse.js";
-// import Joi from "joi";
-// import Consultancies from "../../models/Consultancies.js";
-
-// // ✅ Joi Validation Schema
-// const consultancySchema = Joi.object({
-//     photo_url: Joi.string().allow(""),
-//     name: Joi.string().min(3).required(),
-//     gst_number: Joi.string().allow(""),
-//     linkedin_url: Joi.string().allow(""),
-//     facebook_url: Joi.string().allow(""),
-//     instagram_url: Joi.string().allow(""),
-//     is_single_branch: Joi.boolean().default(true),
-//     office_details: Joi.array().items(
-//         Joi.object({
-//             office_name: Joi.string().allow(""),
-//             office_address: Joi.string().allow(""),
-//             office_type: Joi.string().allow(""),
-//             country_code: Joi.string().allow(""),
-//             phone_number: Joi.number().allow(""),
-//         })
-//     ).allow(null),
-// });
-
-// // ✅ Create Consultancy Controller
-// export const createConsultancyController = async (req, res) => {
-//     try {
-//         // 1️⃣ Validate input
-//         const { error, value } = consultancySchema.validate(req.body, { abortEarly: false });
-//         if (error) {
-//             return res.status(400).json({
-//                 success: false,
-//                 message: "Validation failed",
-//                 details: error.details.map((d) => d.message),
-//             });
-//         }
-
-//         // 2️⃣ Create Consultancy
-//         const newConsultancy = new Consultancies(req.body);
-//         await newConsultancy.save();
-
-//         // 3️⃣ Respond success
-//         return successResponse(res, "Consultancy created successfully 🚀", {
-//             success: true,
-//             consultancy: newConsultancy,
-//         });
-//     } catch (err) {
-//         console.error("❌ Error creating Consultancy:", err);
-//         return errorResponse(res, "Internal server error", 500);
-//     }
-// };
 import { successResponse, errorResponse } from "../../utils/ApiResponse.js";
 import Joi from "joi";
 import Consultancies from "../../models/Consultancies.js";
+import ConsultancyBranches from "../../models/ConsultancyBranches.js";
 
 // ✅ Joi Validation Schema (FIXED)
 const consultancySchema = Joi.object({
@@ -65,13 +14,14 @@ const consultancySchema = Joi.object({
     instagram_url: Joi.string().allow(""),
     is_single_branch: Joi.boolean().default(true),
     subdomain: Joi.string().allow(""),
-    office_details: Joi.array().items(
+    branches: Joi.array().items(
         Joi.object({
-            office_city: Joi.string().allow(""),
-            office_address: Joi.string().allow(""),
-            office_type: Joi.string().allow(""),
-            country_code: Joi.string().allow(""),
-            phone_number: Joi.number().allow(""),
+            branch_city: Joi.string().required(),
+            branch_name: Joi.string().required(),
+            branch_address: Joi.string().required(),
+            branch_type: Joi.string().required(), // headoffice/branch/franchise
+            country_code: Joi.string().required(),
+            phone_number: Joi.number().required(),
         })
     ).required(),
 });
@@ -80,7 +30,7 @@ const consultancySchema = Joi.object({
 export const createConsultancyController = async (req, res) => {
     try {
         // 1️⃣ Validate input
-        const { error } = consultancySchema.validate(req.body, { abortEarly: false });
+        const { error, value } = consultancySchema.validate(req.body, { abortEarly: false });
         if (error) {
             return res.status(400).json({
                 success: false,
@@ -93,7 +43,11 @@ export const createConsultancyController = async (req, res) => {
         const newConsultancy = new Consultancies(req.body);
         await newConsultancy.save();
 
-        // 3️⃣ Respond success
+        // 3️⃣ Create Consultancy Branches
+        const branches = req.body.branches.map((branch) => ({ ...branch, consultancy_id: newConsultancy._id }));
+        await ConsultancyBranches.insertMany(branches);
+
+        // 4️⃣ Respond success
         return successResponse(res, "Consultancy created successfully 🚀", {
             success: true,
             consultancy: newConsultancy,
