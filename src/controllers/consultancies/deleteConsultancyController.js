@@ -3,6 +3,28 @@ import Joi from "joi";
 import Consultancies from "../../models/Consultancies.js";
 import ConsultancyBranches from "../../models/ConsultancyBranches.js";
 
+const consultancySchema = Joi.object({
+    photo_url: Joi.string().allow(""),
+    name: Joi.string().min(3).required(),
+    company_website: Joi.string().allow(""),
+    gst_number: Joi.string().allow(""),
+    linkedin_url: Joi.string().allow(""),
+    facebook_url: Joi.string().allow(""),
+    instagram_url: Joi.string().allow(""),
+    is_single_branch: Joi.boolean().default(true),
+    subdomain: Joi.string().allow(""),
+    branches: Joi.array().items(
+        Joi.object({
+            branch_city: Joi.string().required(),
+            branch_name: Joi.string().required(),
+            branch_address: Joi.string().required(),
+            branch_type: Joi.string().required(), // headoffice/branch/franchise
+            country_code: Joi.string().required(),
+            phone_number: Joi.number().required(),
+        })
+    ).required(),
+});
+
 // 🗑️ DELETE CONSULTANCY BY ID
 export const deleteConsultancyController = async (req, res) => {
     try {
