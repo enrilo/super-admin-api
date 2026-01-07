@@ -13,6 +13,7 @@ const consultanciesSchema = new mongoose.Schema(
         subdomain: { type: String },
         office_details: [
             {
+                office_name: { type: String },
                 office_city: { type: String },
                 office_address: { type: String },
                 office_type: { type: String }, // headoffice/branch/franchise

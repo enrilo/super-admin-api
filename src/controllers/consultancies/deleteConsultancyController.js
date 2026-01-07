@@ -13,12 +13,12 @@ const consultancySchema = Joi.object({
     instagram_url: Joi.string().allow(""),
     is_single_branch: Joi.boolean().default(true),
     subdomain: Joi.string().allow(""),
-    branches: Joi.array().items(
+    office_details: Joi.array().items(
         Joi.object({
-            branch_city: Joi.string().required(),
-            branch_name: Joi.string().required(),
-            branch_address: Joi.string().required(),
-            branch_type: Joi.string().required(), // headoffice/branch/franchise
+            office_city: Joi.string().required(),
+            office_name: Joi.string().required(),
+            office_address: Joi.string().required(),
+            office_type: Joi.string().required(), // headoffice/branch/franchise
             country_code: Joi.string().required(),
             phone_number: Joi.number().required(),
         })
