@@ -32,6 +32,7 @@ const superAdminSchema = new mongoose.Schema(
         // Documents (can store file URLs or metadata)
         documents: [
             {
+                _id: false,
                 name: { type: String }, // e.g., "Passport", "ID Card"
                 url: { type: String },  // file or document URL
                 number: { type: String },  // file or document URL
