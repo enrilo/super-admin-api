@@ -46,11 +46,7 @@ export const fetchConsultancyByIdController = async (req, res) => {
         }
 
         // 4️⃣ Respond success
-        return successResponse(res, "Consultancy found successfully 🚀", {
-            success: true,
-            consultancy,
-            branches,
-        });
+        return successResponse(res, "Consultancy found successfully 🚀", { success: true, consultancy });
     } catch (err) {
         console.error("❌ Error fetching Consultancy:", err);
         return errorResponse(res, "Internal server error", 500);
