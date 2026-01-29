@@ -18,6 +18,7 @@ const paymentDetailsSchema = Joi.object({
     payment_status: Joi.string().valid("pending", "partial", "full").default("pending"),
     payment_received: Joi.number().default(0),
     pending_payment: Joi.number().default(0),
+    billing_date: Joi.date().required(),
     from_date: Joi.date().required(),
     to_date: Joi.date().required(),
 });
