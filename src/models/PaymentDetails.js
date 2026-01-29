@@ -15,6 +15,7 @@ const paymentDetailsSchema = new mongoose.Schema(
         payment_status: { type: String, enum: ["pending", "partial", "full"], default: "pending" },
         payment_received: { type: Number, default: 0 },
         pending_payment: { type: Number, default: 0 },
+        billing_date: { type: Date, required: true },
         from_date: { type: Date, required: true },
         to_date: { type: Date, required: true },
     },
