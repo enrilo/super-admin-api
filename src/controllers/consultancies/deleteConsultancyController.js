@@ -1,7 +1,6 @@
 import { successResponse, errorResponse } from "../../utils/ApiResponse.js";
 import Joi from "joi";
 import Consultancies from "../../models/Consultancies.js";
-import ConsultancyBranches from "../../models/ConsultancyBranches.js";
 
 const consultancySchema = Joi.object({
     photo_url: Joi.string().allow(""),
@@ -45,9 +44,6 @@ export const deleteConsultancyController = async (req, res) => {
         if (!consultancy) {
             return errorResponse(res, "Consultancy not found", 404);
         }
-
-        // 3️⃣ Delete Consultancy Branches
-        await ConsultancyBranches.deleteMany({ consultancy_id: id });
 
         // 4️⃣ Delete Consultancy
         await consultancy.deleteOne();

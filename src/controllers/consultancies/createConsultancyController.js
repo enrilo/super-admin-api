@@ -1,7 +1,6 @@
 import { successResponse, errorResponse } from "../../utils/ApiResponse.js";
 import Joi from "joi";
 import Consultancies from "../../models/Consultancies.js";
-import ConsultancyBranches from "../../models/ConsultancyBranches.js";
 
 // ✅ Joi Validation Schema (FIXED)
 const consultancySchema = Joi.object({
